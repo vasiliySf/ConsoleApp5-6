@@ -44,7 +44,6 @@ class MainClass
                      
         if (answerPets.ToUpper() == "ДА")
            {
-            int numPet;
             string num;
             bool CheckNum = false;
             int ResultNum = 0;
