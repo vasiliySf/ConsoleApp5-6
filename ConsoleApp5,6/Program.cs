@@ -19,7 +19,7 @@ class MainClass
         string Name2;
         do
         {
-            Console.WriteLine("Введите фамилию!");            
+            Console.WriteLine("Введите фамилию!");
             Name2 = Console.ReadLine();
         }
         while (CheckLetterInString(Name2, "Фамилия введена неправильно!"));
@@ -27,7 +27,7 @@ class MainClass
 
         string age;
         bool Check = false;
-        int ResultAge=0;
+        int ResultAge = 0;
 
         while (!Check)
         {
@@ -41,35 +41,42 @@ class MainClass
         Console.WriteLine("Есть ли у Вас домашние животные (ответ да/нет)?");
         answerPets = Console.ReadLine();
 
-                     
+
         if (answerPets.ToUpper() == "ДА")
-           {
+        {
             string num;
             bool CheckNum = false;
             int ResultNum = 0;
 
             while (!CheckNum)
-             { 
+            {
                 Console.WriteLine("Введите количество домашних питомцев.");
-                num =  Console.ReadLine();
-                CheckNum = CheckAge(num, out ResultNum);
-              }
-            User.ArrayPets = CreateFillArrayPets(ResultNum);
+                num = Console.ReadLine();
+                CheckNum = CheckNumber(num, out ResultNum);
             }
+            User.ArrayPets = CreateFillArrayPets(ResultNum);
+        }
         else
         {
             User.ArrayPets = new string[1] { "нет домашних питомцев." };
         }
 
-        int numColor;
-        Console.WriteLine("Введите количество любимых цветов.");
-        numColor = int.Parse(Console.ReadLine());
-        User.ArrayColors = CreateFillArrayColor(numColor);
+        string numColor;
+        bool CheckColor = false;
+        int ResultColor = 0;
+
+        while (!CheckColor)
+        {
+            Console.WriteLine("Введите количество любимых цветов.");
+            numColor = Console.ReadLine();
+            CheckColor = CheckNumber(numColor, out ResultColor);
+        }
+        User.ArrayColors = CreateFillArrayColor(ResultColor);
 
         return User;
     }
 
-    static bool CheckNum(string num, out int ResultNum)
+    static bool CheckNumber(string num, out int ResultNum)
     {
 
         if (int.TryParse(num, out int intNum))
@@ -121,11 +128,11 @@ class MainClass
     }
     static void DisplayUser(string Name, string LastName, int Age, string[] ArrayPets, string[] ArrayColors)
     {
-        Console.WriteLine("Имя - {0}",Name);
+        Console.WriteLine("Имя - {0}", Name);
         Console.WriteLine("Фамилия - {0}", LastName);
         Console.WriteLine("Возраст - {0}", Age);
 
-        foreach(string pet in ArrayPets)
+        foreach (string pet in ArrayPets)
         {
             Console.WriteLine("Домашний питомец - {0}", pet);
         }
@@ -137,7 +144,7 @@ class MainClass
     }
 
 
-     
+
     static string[] CreateFillArrayPets(int Number)
     {
         var result = new string[Number];
@@ -159,14 +166,14 @@ class MainClass
         return result;
     }
 
-    static bool CheckLetterInString(string Word, string TextMsg ="")
+    static bool CheckLetterInString(string Word, string TextMsg = "")
     {
-        for(int i=0; i < Word.Length;i++)
+        for (int i = 0; i < Word.Length; i++)
         {
-            if (!Char.IsLetter(Word, i ))
+            if (!Char.IsLetter(Word, i))
             {
                 if (TextMsg != "")
-                   Console.WriteLine(TextMsg);
+                    Console.WriteLine(TextMsg);
 
                 return true;
             }
