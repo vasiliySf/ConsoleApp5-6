@@ -6,11 +6,24 @@ class MainClass
     {
         (string Name, string LastName, int Age, string[] ArrayPets, string[] ArrayColors) User;
 
-        Console.WriteLine("Введите имя!");
-        User.Name = Console.ReadLine();
+        string Name1;
+        do
+        {
+            Console.WriteLine("Введите имя!");
+            Name1 = Console.ReadLine();
+        }
+        while (CheckLetterInString(Name1));
 
-        Console.WriteLine("Введите фамилию!");
-        User.LastName = Console.ReadLine();
+        User.Name = Name1;
+
+        string Name2;
+        do
+        {
+            Console.WriteLine("Введите фамилию!");            
+            Name2 = Console.ReadLine();
+        }
+        while (CheckLetterInString(Name2));
+        User.LastName = Name2;
 
         string age;
         bool Check = false;
@@ -39,7 +52,9 @@ class MainClass
             User.ArrayPets = CreateFillArrayPets(numPet);
             }
         else
+        {
             User.ArrayPets = new string[1] {"нет домашних животных"};
+        }
 
         int numColor;
         Console.WriteLine("Введите количество любимых цветов.");
@@ -66,7 +81,9 @@ class MainClass
             }
         }
         else
+        {
             Console.WriteLine("Введите корректный возраст!");
+        }
 
         ResultAge = -1;
         return false;
@@ -78,10 +95,14 @@ class MainClass
         Console.WriteLine("Возраст - {0}", Age);
 
         foreach(string pet in ArrayPets)
-          Console.WriteLine("Домашний питомец - {0}", pet);
+        {
+            Console.WriteLine("Домашний питомец - {0}", pet);
+        }
 
         foreach (string color in ArrayColors)
+        {
             Console.WriteLine("Цвет - {0}", color);
+        }
     }
 
 
@@ -106,6 +127,19 @@ class MainClass
         }
         return result;
     }
+
+    static bool CheckLetterInString(string Word)
+    {
+        for(int i=0; i < Word.Length;i++)
+        {
+            if (!Char.IsLetter(Word, i ))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void Main(string[] args)
     {
         var User = EnterUser();
