@@ -12,7 +12,7 @@ class MainClass
             Console.WriteLine("Введите имя!");
             Name1 = Console.ReadLine();
         }
-        while (CheckLetterInString(Name1, "Имя введено неправильно!"));
+        while (CheckNoLetterInString(Name1, "Имя введено неправильно!"));
 
         User.Name = Name1;
 
@@ -22,7 +22,7 @@ class MainClass
             Console.WriteLine("Введите фамилию!");
             Name2 = Console.ReadLine();
         }
-        while (CheckLetterInString(Name2, "Фамилия введена неправильно!"));
+        while (CheckNoLetterInString(Name2, "Фамилия введена неправильно!"));
         User.LastName = Name2;
 
         string age;
@@ -170,7 +170,7 @@ class MainClass
         return result;
     }
 
-    static bool CheckLetterInString(string Word, string TextMsg = "")
+    static bool CheckNoLetterInString(string Word, string TextMsg = "")
     {
         for (int i = 0; i < Word.Length; i++)
         {
