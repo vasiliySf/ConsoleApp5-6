@@ -12,7 +12,7 @@ class MainClass
             Console.WriteLine("Введите имя!");
             Name1 = Console.ReadLine();
         }
-        while (CheckLetterInString(Name1));
+        while (CheckLetterInString(Name1, "Имя введено неправильно!"));
 
         User.Name = Name1;
 
@@ -22,7 +22,7 @@ class MainClass
             Console.WriteLine("Введите фамилию!");            
             Name2 = Console.ReadLine();
         }
-        while (CheckLetterInString(Name2));
+        while (CheckLetterInString(Name2, "Фамилия введена неправильно!"));
         User.LastName = Name2;
 
         string age;
@@ -41,19 +41,25 @@ class MainClass
         Console.WriteLine("Есть ли у Вас домашние животные (ответ да/нет)?");
         answerPets = Console.ReadLine();
 
-       
-
-        answerPets = answerPets.ToUpper();
-        if (answerPets == "ДА")
+                     
+        if (answerPets.ToUpper() == "ДА")
            {
             int numPet;
-            Console.WriteLine("Введите количество домашних животных.");
-            numPet = int.Parse(Console.ReadLine());
-            User.ArrayPets = CreateFillArrayPets(numPet);
+            string num;
+            bool CheckNum = false;
+            int ResultNum = 0;
+
+            while (!CheckNum)
+             { 
+                Console.WriteLine("Введите количество домашних питомцев.");
+                num =  Console.ReadLine();
+                CheckNum = CheckAge(num, out ResultNum);
+              }
+            User.ArrayPets = CreateFillArrayPets(ResultNum);
             }
         else
         {
-            User.ArrayPets = new string[1] {"нет домашних животных"};
+            User.ArrayPets = new string[1] { "нет домашних питомцев." };
         }
 
         int numColor;
@@ -62,6 +68,32 @@ class MainClass
         User.ArrayColors = CreateFillArrayColor(numColor);
 
         return User;
+    }
+
+    static bool CheckNum(string num, out int ResultNum)
+    {
+
+        if (int.TryParse(num, out int intNum))
+        {
+            if (intNum > 0)
+            {
+                ResultNum = intNum;
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Количество должно быть больше нуля!");
+                ResultNum = -1;
+                return false;
+            }
+        }
+        else
+        {
+            Console.WriteLine("Введите корректное количество");
+        }
+
+        ResultNum = -1;
+        return false;
     }
     static bool CheckAge(string age, out int ResultAge)
     {
@@ -128,12 +160,15 @@ class MainClass
         return result;
     }
 
-    static bool CheckLetterInString(string Word)
+    static bool CheckLetterInString(string Word, string TextMsg ="")
     {
         for(int i=0; i < Word.Length;i++)
         {
             if (!Char.IsLetter(Word, i ))
             {
+                if (TextMsg != "")
+                   Console.WriteLine(TextMsg);
+
                 return true;
             }
         }
