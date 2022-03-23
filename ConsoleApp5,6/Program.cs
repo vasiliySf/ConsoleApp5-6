@@ -38,9 +38,13 @@ class MainClass
         User.Age = ResultAge;
 
         string answerPets;
-        Console.WriteLine("Есть ли у Вас домашние животные (ответ да/нет)?");
-        answerPets = Console.ReadLine();
-
+        do
+        {
+            Console.WriteLine("Есть ли у Вас домашние животные (ответ да/нет)?");
+            answerPets = Console.ReadLine();
+        }
+        while ((answerPets.ToUpper() != "ДА") & (answerPets.ToUpper() != "НЕТ"));
+        
 
         if (answerPets.ToUpper() == "ДА")
         {
